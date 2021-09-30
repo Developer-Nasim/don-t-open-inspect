@@ -1,0 +1,84 @@
+<!doctype html>
+
+
+<!-- At first add the oncontextmenu="return false;" -->
+<html class="no-js" lang="" oncontextmenu="return false;">
+<!-- <html class="no-js" lang=""> -->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Site Title Here</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+		<link rel="shortcut icon" type="image/x-icon" href="#">
+        <!-- Place favicon.ico in the root directory -->
+         
+    </head>
+    <body>
+        <h1>Hello world</h1>
+        <p>
+        If you wanna detect devtools in this page. you can just open the devtools. and see what happened when devtools opened.
+        </p>
+
+
+       <script> 
+
+
+
+
+        !function() {
+
+
+            // Remomoving the person for opening dev console
+            document.onkeydown = function(e){
+                if (event.keyCode == 123) {
+                    return false;
+                }
+                if (e.ctrlKey && e.shiftKey && e.keyCode == "I".charCodeAt(0)) {
+                    return false
+                }
+                if (e.ctrlKey && e.shiftKey && e.keyCode == "J".charCodeAt(0)) {
+                    return false
+                }
+                if (e.ctrlKey && e.keyCode == "U".charCodeAt(0)) {
+                    return false
+                }
+            }
+
+
+
+            // Detect if the devtools was opend or not...
+            function detectDevTool(allow) {
+                if(isNaN(+allow)) allow = 100;
+                var start = +new Date();
+                debugger;
+                var end = +new Date();
+                if(isNaN(start) || isNaN(end) || end - start > allow) {
+                    alert('DEVTOOLS detected. all operations will be terminated.');
+                document.write('DEVTOOLS detected.');
+                }
+            }
+            if(window.attachEvent) {
+                if (document.readyState === "complete" || document.readyState === "interactive") {
+                    detectDevTool();
+                    window.attachEvent('onresize', detectDevTool);
+                    window.attachEvent('onmousemove', detectDevTool);
+                    window.attachEvent('onfocus', detectDevTool);
+                    window.attachEvent('onblur', detectDevTool);
+                } else {
+                    setTimeout(argument.callee, 0);
+                }
+            } else {
+                window.addEventListener('load', detectDevTool);
+                window.addEventListener('resize', detectDevTool);
+                window.addEventListener('mousemove', detectDevTool);
+                window.addEventListener('focus', detectDevTool);
+                window.addEventListener('blur', detectDevTool);
+            }
+        }(); 
+
+
+       </script>
+     
+    </body>
+</html>
